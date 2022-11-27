@@ -6,3 +6,16 @@ add_user_article:
 articles_home:
   path: /
   defaults: { _controller: '\App\Controllers\ArticlesController::articlesHome' }
+
+login_page:
+  path: /login
+  defaults: { _controller: '\App\Controllers\AuthController::loginAction' }
+
+user_login:
+  path: /user-login
+  methods:    POST
+  defaults: { _controller: '\App\Controllers\AuthController::userLoginAction' }
+
+logout_route:
+  path: /logout
+  defaults: { _controller: '\App\Controllers\AuthController::logoutAction' }
