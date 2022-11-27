@@ -68,4 +68,34 @@ class ArticlesModel
 
         return $result;
     }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws Exception
+     */
+    public function getArticleById(int $id): array
+    {
+        $pdo = $this->connection->getConnection();
+        try {
+            $sql       =
+                'SELECT articles.*, users.first_name, users.last_name FROM articles INNER JOIN users ON articles.user_id=users.id WHERE articles.id = :id';
+            $statement = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $statement->execute(
+                [
+                    ':id' => $id,
+                ]
+            );
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return [];
+            }
+        } catch (Exception $ex) {
+            //Log the exception message here
+            return [];
+        }
+
+        return current($result);
+    }
 }

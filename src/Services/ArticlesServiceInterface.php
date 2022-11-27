@@ -18,4 +18,10 @@ interface ArticlesServiceInterface
      * @return array
      */
     public function listArticles(int $pageNumber): array;
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getArticleById(int $id): array;
 }

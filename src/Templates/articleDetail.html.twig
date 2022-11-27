@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    {{ parent() }}
+{{ post.title }}
+{% endblock %}
+{% block body %}
+    <h4>Blog post overview</h4>
+    {% if post is empty %}
+        <span>Articles do not exist</span>
+    {% else %}
+
+        <div class="card">
+            <div class="card-header">
+                Article Detail
+            </div>
+            <div class="card-body">
+                <p class="card-text"><small class="text-muted">Last updated : {{ post.updated_at|date("d.m.y h:m:s") }}</small></p>
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text"><img src="{{ post.image_url }}"></p>
+                <p class="card-text">{{ post.text }}.</p>
+                <p>Author : {{ post.first_name}} {{ post.last_name }}</p>
+                <a href="/" class="card-link">Go Back</a>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}
+

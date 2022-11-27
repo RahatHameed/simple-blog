@@ -17,4 +17,10 @@ interface ArticlesModelInterface
      * @return array
      */
     public function articlesList(int $page, int $items_per_page): array;
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getArticleById(int $id): array;
 }

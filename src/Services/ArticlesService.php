@@ -44,8 +44,22 @@ class ArticlesService implements ArticlesServiceInterface
         return $this->articlesModel->addBlogPost($params);
     }
 
+    /**
+     * @param int $pageNumber
+     * @return array
+     * @throws Exception
+     */
     public function listArticles(int $pageNumber): array
     {
         return $this->articlesModel->articlesList($pageNumber, $this->item_per_page);
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getArticleById(int $id): array
+    {
+        return $this->articlesModel->getArticleById($id);
     }
 }

@@ -77,4 +77,19 @@ class ArticlesController extends BaseController
 
         return $response;
     }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function articleDetail($id, Request $request): Response
+    {
+        return $this->renderView(
+            getTwig()->render('articleDetail.html.twig', ['post' => $this->getArticlesService()->getArticleById($id)])
+        );
+    }
 }
