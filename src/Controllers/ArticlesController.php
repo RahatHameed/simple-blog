@@ -9,11 +9,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArticlesController extends BaseController
 {
+    public const PAGE_NUMBER = 'page';
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function articlesHome(Request $request): Response
     {
 
+        $pageNumber = $request->get(self::PAGE_NUMBER, 1);
         return $this->renderView(
-            getTwig()->render('home.html.twig', [])
+            getTwig()->render('home.html.twig', ['articlesList' => $this->getArticlesService()->listArticles($pageNumber)])
         );
     }
 
@@ -30,6 +40,11 @@ class ArticlesController extends BaseController
         return $this->renderView(getTwig()->render('addArticle.html.twig', []));
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
     public function addUserArticleAction(Request $request): JsonResponse
     {
         $response = new JsonResponse();

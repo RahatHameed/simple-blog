@@ -14,6 +14,11 @@ class ArticlesModel
     ) {
     }
 
+    /**
+     * @param array $params
+     * @return bool
+     * @throws Exception
+     */
     public function addBlogPost(array $params): bool
     {
         $pdo = $this->connection->getConnection();
@@ -36,5 +41,31 @@ class ArticlesModel
         }
 
         return true;
+    }
+
+    /**
+     * @param int $page
+     * @param int $items_per_page
+     * @return array
+     * @throws Exception
+     */
+    public function articlesList(int $page, int $items_per_page): array
+    {
+        $offset = ($page - 1) * $items_per_page;
+        $pdo    = $this->connection->getConnection();
+        try {
+            $sql       =
+                'SELECT articles.*, users.first_name, users.last_name FROM articles INNER JOIN users ON articles.user_id=users.id order by articles.updated_at DESC LIMIT :offset, :item_per_page ';
+            $statement = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $statement->bindValue(':item_per_page', $items_per_page, PDO::PARAM_INT);
+            $statement->execute();
+            $result = $statement->fetchAll();
+        } catch (Exception $ex) {
+            //Log the exception message here
+            return [];
+        }
+
+        return $result;
     }
 }

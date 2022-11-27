@@ -6,6 +6,26 @@
 
 {% block body %}
     <h4>Articles List</h4>
-    This template will host list of articles
+    {% if articlesList is empty %}
+        <span>Currently there are no articles!</span>
+    {% else %}
+        <div class="col-xs-12">
+            {% for post in articlesList %}
+                <div class="col-xs-12">
+                    <div class="form-group col-xs-8">
+                        <h4><a href="/article-detail/{{ post.id }}">{{ post.title }}</a></h4><br>
+                        <label for="created_at">Post added</label>:&nbsp&nbsp&nbsp
+                        <span>{{ post.created_at|date("d.m.y h:m:s") }}</span><br>
+                        <label for="updated_at">Post last updated</label>:&nbsp&nbsp&nbsp
+                        <span>{{ post.updated_at|date("d.m.y h:m:s") }}</span><br>
+
+                        <label for="updated_at">Author</label>:&nbsp&nbsp&nbsp
+                        <span><a href="/author-profile/{{ post.user_id }}">{{ post.first_name }} {{ post.last_name }}</a></span><br>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock %}

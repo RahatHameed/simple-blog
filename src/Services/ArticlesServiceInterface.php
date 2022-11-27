@@ -12,4 +12,10 @@ interface ArticlesServiceInterface
      * @return bool
      */
     public function addBlogPost(array $params, Request $request): bool;
+
+    /**
+     * @param int $pageNumber
+     * @return array
+     */
+    public function listArticles(int $pageNumber): array;
 }

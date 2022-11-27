@@ -43,4 +43,9 @@ class ArticlesService implements ArticlesServiceInterface
 
         return $this->articlesModel->addBlogPost($params);
     }
+
+    public function listArticles(int $pageNumber): array
+    {
+        return $this->articlesModel->articlesList($pageNumber, $this->item_per_page);
+    }
 }
