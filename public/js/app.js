@@ -1,13 +1,16 @@
 const selectors = {
     username: '#username',
     password: '#password',
+    title: '#title',
+    text: '#text',
+    imageUrl: '#image_url',
     resMsg: '#res_msg',
 };
 
 function userLogin() {
 
     $(selectors.resMsg).html('');
-    if($(selectors.username).val() =='' || $(selectors.password).val() ==''){
+    if($(selectors.username).val() =='' || $(selectors.password).val() =='' || $(selectors.image_url).val() ==''){
         $(selectors.resMsg).html('Please fill required fields.');
         return false;
     }
@@ -31,4 +34,14 @@ function userLogin() {
                 $(selectors.resMsg).html(result.responseJSON);
             }
     });
+}
+
+function addArticle() {
+
+    $(selectors.resMsg).html('');
+    if ($(selectors.title).val() == '' || $(selectors.text).val() == '') {
+        $(selectors.resMsg).html('Please fill required fields.');
+        return false;
+    }
+
 }

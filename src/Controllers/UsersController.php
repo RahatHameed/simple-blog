@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
-final class UsersController
+
+
+class UsersController extends BaseController
 {
 
 }

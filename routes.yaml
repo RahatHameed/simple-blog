@@ -1,3 +1,7 @@
+add_article_page:
+  path: /add-article-page
+  defaults: { _controller: '\App\Controllers\ArticlesController::addArticleAction' }
+
 add_user_article:
   path: /add-user-article
   defaults: { _controller: '\App\Controllers\UserController::addUserArticleAction' }

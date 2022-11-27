@@ -1,12 +1,12 @@
 services:
 
-user.model:
-  class:     \App\Models\UserModel
-  arguments: ["@database.connection"]
+  user.model:
+    class:     \App\Models\UserModel
+    arguments: ["@database.connection"]
 
-auth.service:
-  class:     \App\Services\AuthService
-  arguments: ["@user.model"]
+  auth.service:
+    class:     \App\Services\AuthService
+    arguments: ["@user.model"]
 
-database.connection:
-  class: \App\Services\DatabaseConnectionService
+  database.connection:
+    class: \App\Services\DatabaseConnectionService

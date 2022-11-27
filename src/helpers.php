@@ -43,5 +43,24 @@ function isUserAuthenticated()
     return isset($_SESSION['user']);
 }
 
+/***
+ * Get hashed value
+ *
+ * @param $string
+ * @return string
+ */
+function getHashedValue($string): string
+{
+    return md5($string);
+}
 
+/**
+ *
+ * @param $url
+ */
+function redirect($url)
+{
+    header('Location: ' . $url, true);
+    exit();
+}
 
