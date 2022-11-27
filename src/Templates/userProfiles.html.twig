@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    {{ parent() }}
+    Blog Listing
+{% endblock %}
+
+{% block body %}
+    <h4>Users List</h4>
+    {% if usersProfile is empty %}
+        <span>Currently there are no articles!</span>
+    {% else %}
+        <div class="col-xs-12">
+            {% for user in usersProfile %}
+                <div class="col-xs-12">
+                    <div class="form-group col-xs-8">
+                        <h4><span>{{ user.first_name }} {{ user.last_name }}</span><br></h4><br>
+                        <p class="card-text"><b>User Name:</b> {{ user.username }}</p>
+                        <p class="card-text"><b>Email:</b> {{ user.email }}</p>
+                        <p class="card-text"><small class="text-muted"> Created at : {{ user.created|date("d.m.y h:m:s") }}</small></p>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

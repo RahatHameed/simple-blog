@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    {{ parent() }}
+    Blog Listing
+{% endblock %}
+
+{% block body %}
+    <h4>Articles List</h4>
+    {% if articlesList is empty %}
+        <span>Currently there are no articles!</span>
+    {% else %}
+        <div class="col-xs-12">
+            {% for post in articlesList %}
+                <div class="col-xs-12">
+                    <div class="form-group col-xs-8">
+                        <h4><a href="/article-detail/{{ post.id }}">{{ post.title }}</a></h4><br>
+                        <label for="created_at">Post added</label>:&nbsp&nbsp&nbsp
+                        <span>{{ post.created_at|date("d.m.y h:m:s") }}</span><br>
+                        <label for="updated_at">Post last updated</label>:&nbsp&nbsp&nbsp
+                        <span>{{ post.updated_at|date("d.m.y h:m:s") }}</span><br>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <span>{{ (post.text|length > 50 ? post.text|slice(0, 1000) ~ '…' : post.text)  }}</span>
+                            </div>
+                            <div class="col-sm-4"><img width="400" src="{{ post.image_url }}"></div>
+                        </div>
+                        <label for="updated_at">Author</label>:&nbsp&nbsp&nbsp
+                        <span><a href="/author-profile">{{ post.first_name }} {{ post.last_name }}</a></span><br>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/?page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="/?page=2" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+
+{% endblock %}

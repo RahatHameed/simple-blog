@@ -1,0 +1,27 @@
+parameters:
+  item.per.page: 3
+
+services:
+
+  user.model:
+    class:     \App\Models\UserModel
+    arguments: ["@database.connection"]
+
+  auth.service:
+    class:     \App\Services\AuthService
+    arguments: ["@user.model"]
+
+  database.connection:
+    class: \App\Services\DatabaseConnectionService
+
+  articles.service:
+    class: \App\Services\ArticlesService
+    arguments: [ "@articles.model", "%item.per.page%"]
+
+  articles.model:
+    class: \App\Models\ArticlesModel
+    arguments: [ "@database.connection" ]
+
+  users.service:
+    class: \App\Services\UsersService
+    arguments: [ "@user.model" ]
