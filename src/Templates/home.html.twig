@@ -19,6 +19,12 @@
                         <label for="updated_at">Post last updated</label>:&nbsp&nbsp&nbsp
                         <span>{{ post.updated_at|date("d.m.y h:m:s") }}</span><br>
 
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <span>{{ (post.text|length > 50 ? post.text|slice(0, 1000) ~ '…' : post.text)  }}</span>
+                            </div>
+                            <div class="col-sm-4"><img src="{{ post.image_url }}"></div>
+                        </div>
                         <label for="updated_at">Author</label>:&nbsp&nbsp&nbsp
                         <span><a href="/author-profile/{{ post.user_id }}">{{ post.first_name }} {{ post.last_name }}</a></span><br>
                     </div>
