@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Services\ArticlesService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,5 +28,38 @@ class ArticlesController extends BaseController
         }
 
         return $this->renderView(getTwig()->render('addArticle.html.twig', []));
+    }
+
+    public function addUserArticleAction(Request $request): JsonResponse
+    {
+        $response = new JsonResponse();
+        if (!isUserAuthenticated()) {
+            $response->setStatusCode(Response::HTTP_UNAUTHORIZED);
+            $response->setData('Not allowed');
+
+            return $response;
+        }
+
+        $params = [
+            ArticlesService::POST_TITLE => $request->get(ArticlesService::POST_TITLE, ''),
+            ArticlesService::POST_TEXT  => $request->get(ArticlesService::POST_TEXT, ''),
+            ArticlesService::POST_IMAGE  => $request->get(ArticlesService::POST_IMAGE, ''),
+        ];
+
+        try {
+            $result = $this->getArticlesService()->addBlogPost($params, $request);
+            if ($result === true) {
+                $response->setStatusCode(Response::HTTP_CREATED);
+                $response->setData('Article has been added');
+            } else {
+                $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+                $response->setData('Unable to add article.');
+            }
+        } catch (Exception $ex) {
+            $response->setStatusCode(Response::HTTP_FORBIDDEN);
+            $response->setData($ex->getMessage());
+        }
+
+        return $response;
     }
 }

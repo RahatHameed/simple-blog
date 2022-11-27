@@ -1,3 +1,6 @@
+parameters:
+  item.per.page: 3
+
 services:
 
   user.model:
@@ -10,3 +13,11 @@ services:
 
   database.connection:
     class: \App\Services\DatabaseConnectionService
+
+  articles.service:
+    class: \App\Services\ArticlesService
+    arguments: [ "@articles.model", "%item.per.page%"]
+
+  articles.model:
+    class: \App\Models\ArticlesModel
+    arguments: [ "@database.connection" ]

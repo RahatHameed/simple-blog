@@ -4,7 +4,7 @@ add_article_page:
 
 add_user_article:
   path: /add-user-article
-  defaults: { _controller: '\App\Controllers\UserController::addUserArticleAction' }
+  defaults: { _controller: '\App\Controllers\ArticlesController::addUserArticleAction' }
   methods: POST
 
 articles_home:

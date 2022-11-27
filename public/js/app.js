@@ -44,4 +44,23 @@ function addArticle() {
         return false;
     }
 
+    var form_data = new FormData();
+    form_data.append("title", $(selectors.title).val());
+    form_data.append("text", $(selectors.text).val());
+    form_data.append("image_url", $(selectors.imageUrl).val());
+    $.ajax({
+        url: "/add-user-article",
+        type: "POST",
+        processData: false,
+        contentType: false,
+        data: form_data,
+        success:
+            function (result) {
+                window.location.replace("/");
+            },
+        error:
+            function (result) {
+                $(selectors.resMsg).html(result.responseJSON);
+            }
+    });
 }

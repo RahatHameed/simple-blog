@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\ArticlesService;
 use App\Services\AuthService;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,18 @@ class BaseController
         /** @var AuthService $authService */
         $authService = getContainer()->get('auth.service');
         return $authService;
+    }
+
+    /**
+     * @return ArticlesService
+     * @throws Exception
+     */
+    protected function getArticlesService(): ArticlesService
+    {
+        /** @var ArticlesService $articlesService */
+        $articlesService = getContainer()->get('articles.service');
+
+        return $articlesService;
     }
 
     /**
