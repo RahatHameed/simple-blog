@@ -21,7 +21,7 @@
                 <p>Author : {{ post.first_name}} {{ post.last_name }}</p>
 
                 {% if not isLoggedIn %}
-                    <p class="card-text">Please login to comment.</p>
+                    <p class="card-text" class="text-danger">Please login to comment.</p>
                 {% endif %}
 
                 {% if isLoggedIn %}
