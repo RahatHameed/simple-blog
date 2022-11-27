@@ -64,3 +64,8 @@ function addArticle() {
             }
     });
 }
+
+function addComment(){
+    $(selectors.resMsg).html('Comment feature is under development.');
+    return false;
+}

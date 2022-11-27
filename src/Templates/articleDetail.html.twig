@@ -19,6 +19,40 @@
                 <p class="card-text"><img src="{{ post.image_url }}"></p>
                 <p class="card-text">{{ post.text }}.</p>
                 <p>Author : {{ post.first_name}} {{ post.last_name }}</p>
+
+                {% if not isLoggedIn %}
+                    <p class="card-text">Please login to comment.</p>
+                {% endif %}
+
+                {% if isLoggedIn %}
+                    <div class="row">
+                        <div id="parent" class="col-sm-6">
+                            <form enctype="multipart/form-data" id="commentForm">
+                                <div class="form-group col-xs-8">
+                                    <label for="name">Title</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Name">
+                                </div>
+                                <div class="form-group col-xs-8">
+                                    <label for="name">Mail</label>
+                                    <input type="text" class="form-control" id="mail" placeholder="Mail">
+                                </div>
+                                <div class="form-group col-xs-8">
+                                    <label for="ulink">Image URL</label>
+                                    <input type="text" class="form-control" id="ulink" placeholder="URL">
+                                </div>
+                                <div class="form-group col-xs-8">
+                                    <label for="comment">Text</label>
+                                    <textarea maxlength="1000" class="form-control" id="comment" placeholder="Comment"></textarea>
+                                </div>
+                                <div class="form-group col-xs-8">
+                                    <button type="button" class="btn btn-success" onclick="addComment()">Add Comment</button>
+                                    <div id="res_msg" class="text-danger"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+
                 <a href="/" class="card-link">Go Back</a>
             </div>
         </div>
