@@ -46,4 +46,30 @@ class UserModel implements UserModelInterface
 
         return $result;
     }
+
+    /**
+     * @return array
+     */
+    public function getUsers(): array
+    {
+        $pdo = $this->connection->getConnection();
+
+        try {
+            $sql       = 'SELECT * FROM users';
+            $statement = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $statement->execute();
+            $result = $statement->fetchAll();
+            if (empty($result)) {
+                return [];
+            }
+
+        } catch (Exception $ex) {
+            /**
+             * log the error here
+             */
+            return [];
+        }
+
+        return $result;
+    }
 }

@@ -21,3 +21,7 @@ services:
   articles.model:
     class: \App\Models\ArticlesModel
     arguments: [ "@database.connection" ]
+
+  users.service:
+    class: \App\Services\UsersService
+    arguments: [ "@user.model" ]

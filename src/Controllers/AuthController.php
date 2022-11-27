@@ -9,6 +9,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthController extends BaseController
 {
+    /**
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function loginAction(): Response
     {
         return $this->renderView(
@@ -16,6 +22,11 @@ class AuthController extends BaseController
         );
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
     public function userLoginAction(Request $request): JsonResponse
     {
         $response    = new JsonResponse();

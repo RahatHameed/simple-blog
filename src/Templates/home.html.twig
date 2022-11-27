@@ -23,15 +23,32 @@
                             <div class="col-sm-8">
                                 <span>{{ (post.text|length > 50 ? post.text|slice(0, 1000) ~ '…' : post.text)  }}</span>
                             </div>
-                            <div class="col-sm-4"><img src="{{ post.image_url }}"></div>
+                            <div class="col-sm-4"><img width="400" src="{{ post.image_url }}"></div>
                         </div>
                         <label for="updated_at">Author</label>:&nbsp&nbsp&nbsp
-                        <span><a href="/author-profile/{{ post.user_id }}">{{ post.first_name }} {{ post.last_name }}</a></span><br>
+                        <span><a href="/author-profile">{{ post.first_name }} {{ post.last_name }}</a></span><br>
                     </div>
                 </div>
                 <hr>
             {% endfor %}
         </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/?page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="/?page=2" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     {% endif %}
 
 {% endblock %}

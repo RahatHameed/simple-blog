@@ -10,4 +10,9 @@ interface UserModelInterface
      * @return array
      */
     public function getUserByEmailAndPassword(array $params): array;
+
+    /**
+     * @return array
+     */
+    public function getUsers(): array;
 }

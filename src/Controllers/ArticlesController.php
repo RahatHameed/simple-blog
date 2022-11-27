@@ -23,7 +23,7 @@ class ArticlesController extends BaseController
 
         $pageNumber = $request->get(self::PAGE_NUMBER, 1);
         return $this->renderView(
-            getTwig()->render('home.html.twig', ['articlesList' => $this->getArticlesService()->listArticles($pageNumber)])
+            getTwig()->render('home.html.twig', ['articlesList' => $this->getArticlesService()->listArticles($pageNumber), 'page' => $pageNumber])
         );
     }
 

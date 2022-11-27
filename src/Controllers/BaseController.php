@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\ArticlesService;
+use App\Services\UsersService;
 use App\Services\AuthService;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,5 +47,16 @@ class BaseController
     protected function renderView(string $view): Response
     {
         return new Response($view);
+    }
+
+    /**
+     * @return UsersService
+     * @throws Exception
+     */
+    protected function getUsersService(): UsersService
+    {
+        /** @var UsersService $usersService */
+        $usersService = getContainer()->get('users.service');
+        return $usersService;
     }
 }

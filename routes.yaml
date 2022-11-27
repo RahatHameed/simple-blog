@@ -29,3 +29,7 @@ user_login:
 logout_route:
   path: /logout
   defaults: { _controller: '\App\Controllers\AuthController::logoutAction' }
+
+author_profile:
+  path: /author-profile
+  defaults: { _controller: '\App\Controllers\UsersController::getUsersAction' }
